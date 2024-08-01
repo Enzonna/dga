@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.meta.mapper.TableMetaInfoMapper">
+
+    <resultMap id="table_meta_info_with_extra_resultmap" type="com.enzo.dga.meta.bean.TableMetaInfo" autoMapping="true">
+        <id column="ti_id" property="id"/>
+        <result column="ti_update_time" property="updateTime"/>
+        <result column="ti_create_time" property="createTime"/>
+
+        <!-- 嵌套的对象 -->
+        <association property="tableMetaInfoExtra" javaType="com.enzo.dga.meta.bean.TableMetaInfoExtra"
+                     autoMapping="true">
+            <id column="te_id" property="id"/>
+            <result column="te_create_time" property="createTime"/>
+            <result column="te_update_time" property="updateTime"/>
+        </association>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.meta.bean.TableMetaInfo">
+        <id column="id" property="id"/>
+        <result column="table_name" property="tableName"/>
+        <result column="schema_name" property="schemaName"/>
+        <result column="col_name_json" property="colNameJson"/>
+        <result column="partition_col_name_json" property="partitionColNameJson"/>
+        <result column="table_fs_owner" property="tableFsOwner"/>
+        <result column="table_parameters_json" property="tableParametersJson"/>
+        <result column="table_comment" property="tableComment"/>
+        <result column="table_fs_path" property="tableFsPath"/>
+        <result column="table_input_format" property="tableInputFormat"/>
+        <result column="table_output_format" property="tableOutputFormat"/>
+        <result column="table_row_format_serde" property="tableRowFormatSerde"/>
+        <result column="table_create_time" property="tableCreateTime"/>
+        <result column="table_type" property="tableType"/>
+        <result column="table_bucket_cols_json" property="tableBucketColsJson"/>
+        <result column="table_bucket_num" property="tableBucketNum"/>
+        <result column="table_sort_cols_json" property="tableSortColsJson"/>
+        <result column="table_size" property="tableSize"/>
+        <result column="table_total_size" property="tableTotalSize"/>
+        <result column="table_last_modify_time" property="tableLastModifyTime"/>
+        <result column="table_last_access_time" property="tableLastAccessTime"/>
+        <result column="fs_capcity_size" property="fsCapcitySize"/>
+        <result column="fs_used_size" property="fsUsedSize"/>
+        <result column="fs_remain_size" property="fsRemainSize"/>
+        <result column="assess_date" property="assessDate"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+</mapper>
