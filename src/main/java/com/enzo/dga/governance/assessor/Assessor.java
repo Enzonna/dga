@@ -7,6 +7,8 @@ import org.apache.commons.math3.analysis.function.Max;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * 考评器父类，整体控制考评器流程
@@ -32,9 +34,10 @@ public abstract class Assessor {
             // 分数： 先给满分，在查找问题的过程中按照问题类型来扣分
             governanceAssessDetail.setAssessScore(BigDecimal.TEN);
 
+            governanceAssessDetail.setCreateTime(new Date());
 
             // 3. 查找问题
-            checkProblem();
+            checkProblem(assessParam, governanceAssessDetail);
 
             // 治理链接的处理
             // 两个条件：
@@ -49,7 +52,7 @@ public abstract class Assessor {
                 // 将当前被考评表的id设置到治理链接内
                 // /table_meta/table_meta/detail?tableId=100
                 String realGovernanceUrl = governanceUrl.replace("{tableId}", assessParam.getTableMetaInfo().getId().toString());
-
+                governanceAssessDetail.setGovernanceUrl(realGovernanceUrl);
             }
 
 
@@ -72,6 +75,6 @@ public abstract class Assessor {
         return governanceAssessDetail;
     }
 
-    public abstract void checkProblem();
+    public abstract void checkProblem(AssessParam assessParam, GovernanceAssessDetail governanceAssessDetail) throws Exception;
 
 }

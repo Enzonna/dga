@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * 用来封装考评参数
  */
@@ -25,5 +27,8 @@ public class AssessParam {
     private String assessDate;
 
     // 未来，需要传递别的参数，直接在当前类中添加即可
+
+    // 所有表
+    private List<TableMetaInfo> tableMetaInfoList;
 
 }

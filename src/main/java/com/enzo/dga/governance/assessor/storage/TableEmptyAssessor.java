@@ -1,4 +1,4 @@
-package com.enzo.dga.governance.assessor.spec;
+package com.enzo.dga.governance.assessor.storage;
 
 import com.enzo.dga.governance.assessor.Assessor;
 import com.enzo.dga.governance.bean.AssessParam;
@@ -8,19 +8,21 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
- * 是否有表备注指标
+ * 是否空表指标
  */
-@Component("TABLE_COMMENT")
-public class TableCommentAssessor extends Assessor {
+@Component("TABLE_EMPTY")
+public class TableEmptyAssessor extends Assessor {
     @Override
     public void checkProblem(AssessParam assessParam, GovernanceAssessDetail governanceAssessDetail) {
-        // 获取表的备注信息
-        String tableComment = assessParam.getTableMetaInfo().getTableComment();
-        if (tableComment == null || tableComment.trim().isEmpty()) {
+        // 获取表数据大小
+        Long tableSize = assessParam.getTableMetaInfo().getTableSize();
+        System.out.println("tableSize = " + tableSize);
+        if (tableSize == null || tableSize == 0L ) {
             // 给分
             governanceAssessDetail.setAssessScore(BigDecimal.ZERO);
             // 问题项
-            governanceAssessDetail.setAssessProblem("表备注为空");
+            governanceAssessDetail.setAssessProblem("空表");
         }
+
     }
 }

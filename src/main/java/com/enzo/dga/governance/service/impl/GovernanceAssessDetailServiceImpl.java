@@ -59,6 +59,8 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
      * 考评思想：每个指标，每张表，逐一进行考评
      * <p>
      * 步骤：
+     * 0.删除考评日期对应的考评结果
+     * <p>
      * 1. 获取所有待考评的表
      * 方案一：不推荐 因为要频繁调动数据库
      * // 查询table_meta_info表和table_meta_info_extra表中的数据，最终封装到TableMetaInfoExtra对象中
@@ -133,6 +135,13 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
 
     @Override
     public void mainAssess(String assessDate) {
+        // 0.删除考评日期对应的考评结果
+        remove(
+                new QueryWrapper<GovernanceAssessDetail>()
+                        .eq("assess_date", assessDate)
+        );
+
+
         // 1. 获取所有待考评的表
         // 方案三：基于JOIN查询，一次性将两张表的数据都查询出来,再通过自定义映射，告诉Mybatis如何封装结果，需要使用xml文件来定义映射规则
 
@@ -225,6 +234,7 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
                         .assessDate(assessDate)
                         .tableMetaInfo(tableMetaInfo)
                         .governanceMetric(governanceMetric)
+                        .tableMetaInfoList(tableMetaInfoList)
                         .build();
 
                 // 开始考评
