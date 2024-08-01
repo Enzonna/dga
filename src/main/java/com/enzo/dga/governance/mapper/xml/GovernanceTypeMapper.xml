@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.governance.mapper.GovernanceTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.governance.bean.GovernanceType">
+        <id column="id" property="id"/>
+        <result column="type_code" property="typeCode"/>
+        <result column="type_desc" property="typeDesc"/>
+        <result column="type_weight" property="typeWeight"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.governance.mapper.GovernanceMetricMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.governance.bean.GovernanceMetric">
+        <id column="id" property="id"/>
+        <result column="metric_name" property="metricName"/>
+        <result column="metric_code" property="metricCode"/>
+        <result column="metric_desc" property="metricDesc"/>
+        <result column="governance_type" property="governanceType"/>
+        <result column="metric_params_json" property="metricParamsJson"/>
+        <result column="governance_url" property="governanceUrl"/>
+        <result column="skip_assess_tables" property="skipAssessTables"/>
+        <result column="is_disabled" property="isDisabled"/>
+    </resultMap>
+
+</mapper>

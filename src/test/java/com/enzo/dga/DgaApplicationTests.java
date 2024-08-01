@@ -1,5 +1,6 @@
 package com.enzo.dga;
 
+import com.enzo.dga.governance.service.GovernanceAssessDetailService;
 import com.enzo.dga.meta.service.impl.TableMetaInfoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,14 @@ class DgaApplicationTests {
     @Autowired
     TableMetaInfoServiceImpl tableMetaInfoService;
 
+    @Autowired
+    GovernanceAssessDetailService governanceAssessDetailService;
+
+    @Test
+    public void testMainAssess() {
+        governanceAssessDetailService.mainAssess("2024-08-01");
+    }
+
     @Test
     public void testHiveClient() {
         tableMetaInfoService.createHiveClient();
@@ -20,5 +29,7 @@ class DgaApplicationTests {
     public void testInitTableMetaInfo() throws Exception {
         tableMetaInfoService.initTableMetaInfo("gmall240318", "2024-08-01");
     }
+
+
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.governance.mapper.GovernanceAssessDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.governance.bean.GovernanceAssessDetail">
+        <id column="id" property="id"/>
+        <result column="assess_date" property="assessDate"/>
+        <result column="table_name" property="tableName"/>
+        <result column="schema_name" property="schemaName"/>
+        <result column="metric_id" property="metricId"/>
+        <result column="metric_name" property="metricName"/>
+        <result column="governance_type" property="governanceType"/>
+        <result column="tec_owner" property="tecOwner"/>
+        <result column="assess_score" property="assessScore"/>
+        <result column="assess_problem" property="assessProblem"/>
+        <result column="assess_comment" property="assessComment"/>
+        <result column="is_assess_exception" property="isAssessException"/>
+        <result column="assess_exception_msg" property="assessExceptionMsg"/>
+        <result column="governance_url" property="governanceUrl"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>
