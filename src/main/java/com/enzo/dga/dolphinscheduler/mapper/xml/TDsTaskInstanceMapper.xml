@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.dolphinscheduler.mapper.TDsTaskInstanceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.dolphinscheduler.bean.TDsTaskInstance">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="task_type" property="taskType" />
+        <result column="task_code" property="taskCode" />
+        <result column="task_definition_version" property="taskDefinitionVersion" />
+        <result column="process_instance_id" property="processInstanceId" />
+        <result column="state" property="state" />
+        <result column="submit_time" property="submitTime" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="host" property="host" />
+        <result column="execute_path" property="executePath" />
+        <result column="log_path" property="logPath" />
+        <result column="alert_flag" property="alertFlag" />
+        <result column="retry_times" property="retryTimes" />
+        <result column="pid" property="pid" />
+        <result column="app_link" property="appLink" />
+        <result column="task_params" property="taskParams" />
+        <result column="flag" property="flag" />
+        <result column="retry_interval" property="retryInterval" />
+        <result column="max_retry_times" property="maxRetryTimes" />
+        <result column="task_instance_priority" property="taskInstancePriority" />
+        <result column="worker_group" property="workerGroup" />
+        <result column="environment_code" property="environmentCode" />
+        <result column="environment_config" property="environmentConfig" />
+        <result column="executor_id" property="executorId" />
+        <result column="first_submit_time" property="firstSubmitTime" />
+        <result column="delay_time" property="delayTime" />
+        <result column="var_pool" property="varPool" />
+        <result column="dry_run" property="dryRun" />
+    </resultMap>
+
+</mapper>

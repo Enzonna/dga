@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.dolphinscheduler.mapper.TDsTaskDefinitionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.dolphinscheduler.bean.TDsTaskDefinition">
+        <id column="id" property="id" />
+        <id column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="version" property="version" />
+        <result column="description" property="description" />
+        <result column="project_code" property="projectCode" />
+        <result column="user_id" property="userId" />
+        <result column="task_type" property="taskType" />
+        <result column="task_params" property="taskParams" />
+        <result column="flag" property="flag" />
+        <result column="task_priority" property="taskPriority" />
+        <result column="worker_group" property="workerGroup" />
+        <result column="environment_code" property="environmentCode" />
+        <result column="fail_retry_times" property="failRetryTimes" />
+        <result column="fail_retry_interval" property="failRetryInterval" />
+        <result column="timeout_flag" property="timeoutFlag" />
+        <result column="timeout_notify_strategy" property="timeoutNotifyStrategy" />
+        <result column="timeout" property="timeout" />
+        <result column="delay_time" property="delayTime" />
+        <result column="resource_ids" property="resourceIds" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+</mapper>

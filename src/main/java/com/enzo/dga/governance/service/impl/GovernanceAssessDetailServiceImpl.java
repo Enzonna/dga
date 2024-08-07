@@ -2,6 +2,9 @@ package com.enzo.dga.governance.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.enzo.dga.dolphinscheduler.bean.TDsTaskDefinition;
+import com.enzo.dga.dolphinscheduler.service.TDsTaskDefinitionService;
+import com.enzo.dga.dolphinscheduler.service.TDsTaskInstanceService;
 import com.enzo.dga.governance.assessor.Assessor;
 import com.enzo.dga.governance.bean.AssessParam;
 import com.enzo.dga.governance.bean.GovernanceAssessDetail;
@@ -51,6 +54,12 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
 
     @Autowired
     SpringIOCProvider springIOCProvider;
+
+    @Autowired
+    TDsTaskDefinitionService tDsTaskDefinitionService;
+
+    @Autowired
+    TDsTaskInstanceService tDsTaskInstanceService;
 
 
     /**
@@ -152,6 +161,18 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
                 new QueryWrapper<GovernanceMetric>()
                         .eq("is_disabled", "0")
         );
+
+
+
+
+        // 😄😄🤣获取DS中的任务定义信息😄😄🤣
+        List<TDsTaskDefinition> tDsTaskDefinitionList = tDsTaskDefinitionService.getTdsTaskDefinitionList();
+
+        // 😄😄🤣获取DS中的任务实例信息😄😄🤣
+
+
+
+
 
 
         // 3. 每张表，每个指标，逐一进行考评
