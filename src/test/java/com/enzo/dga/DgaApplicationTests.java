@@ -17,7 +17,7 @@ class DgaApplicationTests {
 
     @Test
     public void testMainAssess() {
-        governanceAssessDetailService.mainAssess("2024-08-01");
+        governanceAssessDetailService.mainAssess("2024-08-10");
     }
 
     @Test
@@ -27,7 +27,7 @@ class DgaApplicationTests {
 
     @Test
     public void testInitTableMetaInfo() throws Exception {
-        tableMetaInfoService.initTableMetaInfo("gmall240318", "2024-08-01");
+        tableMetaInfoService.initTableMetaInfo("fast_food", "2024-08-10");
     }
 
 

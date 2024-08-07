@@ -12,11 +12,12 @@ import java.util.function.Consumer;
 public class CodeGen3531 {
 
     public static void main(String[] args) {
-        String[] tables = {"governance_metric", "governance_type", "governance_assess_detail"};
+        // String[] tables = {"governance_metric", "governance_type", "governance_assess_detail"};
         // String[] tables = {"table_meta_info", "table_meta_info_extra"};
+        String[] tables = {"t_ds_task_definition","t_ds_task_instance"};
 
 
-        FastAutoGenerator.create("jdbc:mysql://hadoop202:3306/dga_0318", "root", "000000")
+        FastAutoGenerator.create("jdbc:mysql://hadoop202:3306/dolphinscheduler", "root", "000000")
                 .globalConfig(builder -> {
                     builder.author("enzo")               //作者
                             .outputDir("F:\\atguigu\\19-数据治理2\\dga\\src\\main\\java")    //输出路径(写到java目录)
@@ -25,7 +26,7 @@ public class CodeGen3531 {
                 })
                 .packageConfig(builder -> {                 //各个package 名称
                     builder.parent("com.enzo.dga")
-                            .moduleName("governance")
+                            .moduleName("dolphinscheduler")
                             .entity("bean")  //目录名
                             .service("service") //目录名
                             .serviceImpl("service.impl") //目录名
