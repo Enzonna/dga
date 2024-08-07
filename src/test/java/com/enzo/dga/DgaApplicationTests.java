@@ -17,7 +17,7 @@ class DgaApplicationTests {
 
     @Test
     public void testMainAssess() {
-        governanceAssessDetailService.mainAssess("2024-08-10");
+        governanceAssessDetailService.mainAssess("2024-08-07");
     }
 
     @Test

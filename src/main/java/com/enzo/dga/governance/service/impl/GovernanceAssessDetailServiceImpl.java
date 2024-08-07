@@ -3,6 +3,7 @@ package com.enzo.dga.governance.service.impl;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.enzo.dga.dolphinscheduler.bean.TDsTaskDefinition;
+import com.enzo.dga.dolphinscheduler.bean.TDsTaskInstance;
 import com.enzo.dga.dolphinscheduler.service.TDsTaskDefinitionService;
 import com.enzo.dga.dolphinscheduler.service.TDsTaskInstanceService;
 import com.enzo.dga.governance.assessor.Assessor;
@@ -167,8 +168,14 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
 
         // 😄😄🤣获取DS中的任务定义信息😄😄🤣
         List<TDsTaskDefinition> tDsTaskDefinitionList = tDsTaskDefinitionService.getTdsTaskDefinitionList();
+        // System.out.println("tDsTaskDefinitionList = " + tDsTaskDefinitionList);
+
+
 
         // 😄😄🤣获取DS中的任务实例信息😄😄🤣
+        List<TDsTaskInstance> tDsTaskInstanceList = tDsTaskInstanceService.getTdsTaskInstanceList(assessDate);
+        System.out.println("tDsTaskInstanceList = " + tDsTaskInstanceList);
+
 
 
 
