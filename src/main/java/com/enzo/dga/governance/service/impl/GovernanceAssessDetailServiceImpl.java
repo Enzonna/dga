@@ -164,22 +164,25 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
         );
 
 
-
+        // TODO 补充获取DS中的任务定义和任务实例
 
         // 😄😄🤣获取DS中的任务定义信息😄😄🤣
         List<TDsTaskDefinition> tDsTaskDefinitionList = tDsTaskDefinitionService.getTdsTaskDefinitionList();
         // System.out.println("tDsTaskDefinitionList = " + tDsTaskDefinitionList);
-
+        // 处理成Map结构
+        Map<String, TDsTaskDefinition> tDsTaskDefinitionMap = new HashMap<>(tDsTaskDefinitionList.size());
+        for (TDsTaskDefinition tDsTaskDefinition : tDsTaskDefinitionList) {
+            tDsTaskDefinitionMap.put(tDsTaskDefinition.getName(), tDsTaskDefinition);
+        }
 
 
         // 😄😄🤣获取DS中的任务实例信息😄😄🤣
         List<TDsTaskInstance> tDsTaskInstanceList = tDsTaskInstanceService.getTdsTaskInstanceList(assessDate);
-        System.out.println("tDsTaskInstanceList = " + tDsTaskInstanceList);
-
-
-
-
-
+        // 处理成Map结构
+        Map<String, TDsTaskInstance> tDsTaskInstanceMap = new HashMap<>(tDsTaskInstanceList.size());
+        for (TDsTaskInstance tDsTaskInstance : tDsTaskInstanceList) {
+            tDsTaskInstanceMap.put(tDsTaskInstance.getName(), tDsTaskInstance);
+        }
 
 
         // 3. 每张表，每个指标，逐一进行考评
@@ -257,12 +260,18 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
 //                assessParam.setTableMetaInfo(tableMetaInfo);
 //                assessParam.setGovernanceMetric(governanceMetric);
 
+
+                // 😄😄🤣基于当前被考评表的库名和表名拼接成key，到任务定义和任务实例的map中找到对应的任务定义和任务实例
+                String key = tableMetaInfo.getSchemaName() + "." + tableMetaInfo.getTableName();
+
                 // ✅✅✅✅ 建造者方式
                 AssessParam assessParam = AssessParam.builder()
                         .assessDate(assessDate)
                         .tableMetaInfo(tableMetaInfo)
                         .governanceMetric(governanceMetric)
                         .tableMetaInfoList(tableMetaInfoList)
+                        .tDsTaskDefinition(tDsTaskDefinitionMap.get(key))
+                        .tDsTaskInstance(tDsTaskInstanceMap.get(key))
                         .build();
 
                 // 开始考评

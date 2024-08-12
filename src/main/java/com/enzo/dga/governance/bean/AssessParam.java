@@ -1,5 +1,7 @@
 package com.enzo.dga.governance.bean;
 
+import com.enzo.dga.dolphinscheduler.bean.TDsTaskDefinition;
+import com.enzo.dga.dolphinscheduler.bean.TDsTaskInstance;
 import com.enzo.dga.meta.bean.TableMetaInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +33,10 @@ public class AssessParam {
     // 所有表
     private List<TableMetaInfo> tableMetaInfoList;
 
+
+    // 任务定义
+    TDsTaskDefinition tDsTaskDefinition;
+
+    // 任务实例
+    TDsTaskInstance tDsTaskInstance;
 }

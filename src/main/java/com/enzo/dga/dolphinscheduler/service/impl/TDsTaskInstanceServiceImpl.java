@@ -22,6 +22,48 @@ import java.util.List;
 @DS("dolphinscheduler")
 public class TDsTaskInstanceServiceImpl extends ServiceImpl<TDsTaskInstanceMapper, TDsTaskInstance> implements TDsTaskInstanceService {
 
+    /**
+     * 查询前days天的任务实例
+     *
+     * @param name
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    @Override
+    public List<TDsTaskInstance> getBeforeDaysTaskInstanceList(String name, String startDate, String endDate) {
+        return list(
+                new QueryWrapper<TDsTaskInstance>()
+                        .inSql("id",
+                                "select\n" +
+                                        "              max(id) max_id\n" +
+                                        "          from\n" +
+                                        "              t_ds_task_instance\n" +
+                                        "          where name = '" + name + "'\n" +
+                                        "            and state = 7\n" +
+                                        "            and DATE_FORMAT(start_time, '%Y-%m-%d') >= '" + startDate + "'\n" +
+                                        "            and DATE_FORMAT(start_time, '%Y-%m-%d') <= '" + endDate + "'\n" +
+                                        "          group by name, DATE_FORMAT(start_time, '%Y-%m-%d')")
+        );
+    }
+
+
+    /**
+     * 查询指定考评日期，指定表对应的失败任务实例
+     *
+     * @param name
+     * @param assessDate
+     * @return
+     */
+    @Override
+    public List<TDsTaskInstance> getFailTdsTaskInstance(String name, String assessDate) {
+        return list(
+                new QueryWrapper<TDsTaskInstance>()
+                        .eq("name", name)
+                        .eq("state", 6)
+                        .eq("DATE_FORMAT(start_time,'%Y-%m-%d')", assessDate)
+        );
+    }
 
     /**
      * 查询DS中的任务实例，通过in的方式
@@ -42,4 +84,6 @@ public class TDsTaskInstanceServiceImpl extends ServiceImpl<TDsTaskInstanceMappe
                                 "       group by name")
         );
     }
+
+
 }

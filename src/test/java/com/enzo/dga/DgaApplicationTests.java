@@ -27,7 +27,7 @@ class DgaApplicationTests {
 
     @Test
     public void testInitTableMetaInfo() throws Exception {
-        tableMetaInfoService.initTableMetaInfo("fast_food", "2024-08-10");
+        tableMetaInfoService.initTableMetaInfo("fast_food", "2024-08-07");
     }
 
 
