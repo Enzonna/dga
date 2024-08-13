@@ -65,7 +65,6 @@ public class TableSqlSelectAllAssessor extends Assessor {
             // 转换成AstNode类型
             ASTNode astNode = (ASTNode) node;
 
-            System.out.println("nd.getName() = " + astNode.getText());
             // 判断当前节点是否为select*
             if (astNode.getType() == HiveParser.TOK_ALLCOLREF) {
                 isContainsSelectAll = true;

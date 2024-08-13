@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -35,6 +36,12 @@ public class TableDataSkewAssessor extends Assessor {
             return;
         }
 
+        // 提取指标参数
+        String metricParamsJson = assessParam.getGovernanceMetric().getMetricParamsJson();
+        JSONObject paramJsonObj = JSON.parseObject(metricParamsJson);
+        Integer paramPercent = paramJsonObj.getInteger("percent");
+        Integer paramStageDurSeconds = paramJsonObj.getInteger("stage_dur_seconds");
+
         // 获取任务实例中的yarnId
         String yarnId = assessParam.getTDsTaskInstance().getAppLink();
 
@@ -46,6 +53,29 @@ public class TableDataSkewAssessor extends Assessor {
 
         // 将每个Stage处理成一个自定义的Stage对象，将指标关注的信息封装到Stage对象中
         List<Stage> stageList = getStageList(yarnId, completedAttemptId, stageIdList);
+
+        // 存在数据倾斜的集合
+        ArrayList<Stage> dataSkewStageList = new ArrayList<>();
+
+        for (Stage stage : stageList) {
+            if (stage.getMaxTaskDuration() > paramStageDurSeconds) {
+                if (stage.getRealPercent() > paramPercent) {
+                    // 存在数据倾斜
+                    dataSkewStageList.add(stage);
+                }
+            }
+        }
+
+        if (dataSkewStageList.size() > 0) {
+            // 存在数据倾斜，给分
+            governanceAssessDetail.setAssessScore(BigDecimal.ZERO);
+            // 问题项
+            governanceAssessDetail.setAssessProblem("存在数据倾斜");
+        }
+
+        // 考评备注
+        governanceAssessDetail.setAssessComment("所有的阶段：" + stageList + "，数据倾斜的阶段：" + dataSkewStageList);
+
 
     }
 

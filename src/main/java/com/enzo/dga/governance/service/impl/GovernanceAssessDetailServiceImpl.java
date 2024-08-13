@@ -24,10 +24,7 @@ import com.google.common.base.CaseFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -185,6 +182,9 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
         }
 
 
+        // TODO：线程池优化🐔🐔🐔
+        long start = System.currentTimeMillis();
+
         // 3. 每张表，每个指标，逐一进行考评
 
         // 创建集合，保存考评结果
@@ -195,6 +195,21 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
             for (GovernanceMetric governanceMetric : governanceMetricList) {
                 // 每张表 tableMetaInfo
                 // 每个指标 governanceMetric
+
+
+                // TODO:白名单操作🍵🍵🍵
+                // 提取当前指标的白名单
+                String skipAssessTables = governanceMetric.getSkipAssessTables();
+                if (skipAssessTables != null && !skipAssessTables.trim().isEmpty()) {
+                    // 通过逗号切割
+                    List<String> skipTablesNames = Arrays.asList(skipAssessTables.split(","));
+                    // 判断当前白名单列表是否包含当前被考评表
+                    if (skipTablesNames.contains(tableMetaInfo.getTableName())) {
+                        // 跳过当前指标对当前表的考评
+                        continue;
+                    }
+                }
+
 
                 // 每个指标只是数据库表中定义的一条数据，我们期望指标是能工作的，说白了 就是能在代码中执行，并且拥有一些功能，比如查找表中存在的问题
                 // 将每个指标设计成一个具体的类（考评器），类中拥有方法，方法中写查找表问题的代码
@@ -282,6 +297,11 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
             }
 
         }
+
+
+        // 🐔🐔🐔
+        long end = System.currentTimeMillis();
+        System.out.println("本次考评耗时：" + (end - start) + "ms");
 
         // 4. 将考评结果写到数据库的表中
         saveBatch(governanceAssessDetailList);

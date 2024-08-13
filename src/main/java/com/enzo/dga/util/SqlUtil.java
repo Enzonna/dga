@@ -29,13 +29,11 @@ public class SqlUtil {
                 // 将当前节点的第1个孩子节点作为根节点
                 astNode = (ASTNode) astNode.getChild(0);
             }
-            System.out.println(astNode);
 
-//            // 遍历树
+            // 遍历树
             DefaultGraphWalker defaultGraphWalker = new DefaultGraphWalker(dispatcher);
             defaultGraphWalker.startWalking(Collections.singleton(astNode), null);
 
-            System.out.println("---------------------------------------");
 
         } catch (Exception e) {
             throw new RuntimeException("解析SQL失败");
