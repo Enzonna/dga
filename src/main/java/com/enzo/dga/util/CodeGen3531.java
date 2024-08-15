@@ -15,7 +15,7 @@ public class CodeGen3531 {
         // String[] tables = {"governance_metric", "governance_type", "governance_assess_detail"};
         // String[] tables = {"table_meta_info", "table_meta_info_extra"};
         // String[] tables = {"t_ds_task_definition","t_ds_task_instance"};
-        String[] tables = {"governance_assess_global"};
+        String[] tables = {"governance_lineage_table"};
 
 
         FastAutoGenerator.create("jdbc:mysql://fastfood102:3306/dga", "root", "000000")
