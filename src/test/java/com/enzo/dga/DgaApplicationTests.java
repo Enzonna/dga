@@ -1,6 +1,9 @@
 package com.enzo.dga;
 
 import com.enzo.dga.governance.service.GovernanceAssessDetailService;
+import com.enzo.dga.governance.service.MainAssessService;
+import com.enzo.dga.meta.bean.TableMetaInfo;
+import com.enzo.dga.meta.service.TableMetaInfoService;
 import com.enzo.dga.meta.service.impl.TableMetaInfoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,20 @@ class DgaApplicationTests {
 
     @Autowired
     GovernanceAssessDetailService governanceAssessDetailService;
+
+    @Autowired
+    MainAssessService mainAssessService;
+
+
+    /**
+     * 总调用
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testMainAssessService() throws Exception {
+        mainAssessService.mainAssess("2024-08-07");
+    }
 
     @Test
     public void testMainAssess() {

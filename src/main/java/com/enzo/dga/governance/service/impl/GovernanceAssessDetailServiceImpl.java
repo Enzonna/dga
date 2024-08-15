@@ -61,6 +61,34 @@ public class GovernanceAssessDetailServiceImpl extends ServiceImpl<GovernanceAss
 
 
     /**
+     * 根据治理类型进行分组聚合 所有问题求个数
+     */
+    @Override
+    public List<Map<String, Object>> getLastProblemNum() {
+        QueryWrapper<GovernanceAssessDetail> queryWrapper = new QueryWrapper<GovernanceAssessDetail>()
+                .select("governance_type", "count(*) ct")
+                .lt("assess_score", 10)
+                .inSql("assess_date", "select max(assess_date) from governance_assess_detail")
+                .groupBy("governance_type");
+        List<Map<String, Object>> mapList = listMaps(queryWrapper);
+        return mapList;
+    }
+
+    @Override
+    public List<GovernanceAssessDetail> getLastProblemListByType(String governType, Integer pageNo, Integer pageSize) {
+        //根据每页大小和页码计算显示行号
+        int from = (pageNo - 1) * pageSize;
+
+        QueryWrapper<GovernanceAssessDetail> queryWrapper = new QueryWrapper<GovernanceAssessDetail>()
+                .eq("governance_type", governType)
+                .lt("assess_score", 10)
+                .inSql("assess_date", "select max(assess_date) from governance_assess_detail")
+                .last("limit " + from + "," + pageSize);
+        List<GovernanceAssessDetail> governanceAssessDetailList = list(queryWrapper);
+        return governanceAssessDetailList;
+    }
+
+    /**
      * 核心考评方法
      * <p>
      * 考评思想：每个指标，每张表，逐一进行考评

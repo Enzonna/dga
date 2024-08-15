@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enzo.dga.governance.mapper.GovernanceAssessTecOwnerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.enzo.dga.governance.bean.GovernanceAssessTecOwner">
+        <id column="id" property="id"/>
+        <result column="assess_date" property="assessDate"/>
+        <result column="tec_owner" property="tecOwner"/>
+        <result column="score_spec" property="scoreSpec"/>
+        <result column="score_storage" property="scoreStorage"/>
+        <result column="score_calc" property="scoreCalc"/>
+        <result column="score_quality" property="scoreQuality"/>
+        <result column="score_security" property="scoreSecurity"/>
+        <result column="score" property="score"/>
+        <result column="table_num" property="tableNum"/>
+        <result column="problem_num" property="problemNum"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+</mapper>
